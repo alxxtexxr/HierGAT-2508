@@ -21,7 +21,7 @@ The raw datasets can be found at
 
 ## Train HierGAT
 
-```
+<!-- ```
 python train.py \ 
 	--task Amazon \
 	--batch_size 32 \
@@ -31,6 +31,18 @@ python train.py \
 	--finetuning \
 	--split \
 	--lm bert
+``` -->
+
+```
+python train.py \ 
+--task "Amazon-Google" \
+--batch_size 32 \
+--max_len 256 \
+--lr 1e-5 \
+--n_epochs 10 \
+--finetuning \
+--split \
+--lm bert
 ```
 
 - `--task`: the name of the tasks (see `task.json`)

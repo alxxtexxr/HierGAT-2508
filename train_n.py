@@ -16,7 +16,7 @@ import torch.optim as optim
 
 from tensorboardX import SummaryWriter
 from torch.utils import data
-from transformers import AdamW, get_linear_schedule_with_warmup
+from transformers import get_linear_schedule_with_warmup
 
 
 def train(model, train_set, optimizer, scheduler=None, batch_size=32, su=None):
@@ -67,11 +67,9 @@ def initialize_and_train(trainset, validset, testset, attr_num, args, run_tag,
     # initialize model
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
     model = TranHGAT(attr_num, device, args.finetuning, lm=args.lm, lm_path=args.lm_path)
-    if device == 'cpu':
-        optimizer = AdamW(model.parameters(), lr=args.lr)
-    else:
+    if device == 'cuda':
         model = model.cuda()
-        optimizer = AdamW(model.parameters(), lr=args.lr)
+    optimizer = optim.AdamW(model.parameters(), lr=args.lr)
 
     # learning rate scheduler
     num_steps = (len(trainset) // args.batch_size) * args.n_epochs

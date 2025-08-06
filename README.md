@@ -21,18 +21,6 @@ The raw datasets can be found at
 
 ## Train HierGAT
 
-<!-- ```
-python train.py \ 
-	--task Amazon \
-	--batch_size 32 \
-	--max_len 256 \
-	--lr 1e-5 \
-	--n_epochs 10 \
-	--finetuning \
-	--split \
-	--lm bert
-``` -->
-
 ```
 python train.py \ 
 --task "Amazon-Google" \
@@ -54,13 +42,15 @@ python train.py \
 
 ##  Train HierGAT+
 
+Run `python -m nltk.downloader stopwords` first.
+
 ```
-python train_n.py \ 
-	--task N/Amazon \
-	--su_len 10 \
-	--finetuning \
-	--split \
-	--lm bert
+python train_n.py \
+--task "N/Amazon-Google" \
+--su_len 10 \
+--finetuning \
+--split \
+--lm bert
 ```
 
 Same as HierGAT, with one additional parameter:
